@@ -2,14 +2,21 @@ import struct
 
 
 def tamper(student_id):
-  pass
+
+  with open('lenna.bmp','rb+') as f:
+
+    f.seek(54)
+
+    a=bytes([0,0,0])
+
+    f.write(a)
 
 
 def detect():
   with open('lenna.bmp', 'rb') as f:
     bmp_file_header = f.read(14)
 
-    bm, size, r1, r2, offset = struct.unpack('<2sIHHI', bmp_file_header)
+    bm, size, r1,  r2,  offset = struct.unpack('<2sIHHI', bmp_file_header)
 
     f.seek(offset)
 
