@@ -1,15 +1,28 @@
 import struct
 
-
 def tamper(student_id):
 
   with open('lenna.bmp','rb+') as f:
 
-    f.seek(54)
+    f.seek(54,0)
 
-    a=bytes([0,0,0])
+    for i in student_id:
 
-    f.write(a)
+      i=int(i)
+
+      if i==0:
+
+        f.seek(10*3,1)
+      
+      else:
+
+        f.seek(i*3,1)
+
+      a=bytes([0,0,0])
+
+      f.write(a)
+
+      f.seek(-3,1)
 
 
 def detect():
@@ -24,6 +37,7 @@ def detect():
     offset = 0
     last_offset = 0
     while count > 0:
+
       color = f.read(3)
 
       if color == b'\x00\x00\x00':
