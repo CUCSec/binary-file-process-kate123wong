@@ -11,19 +11,14 @@ def tamper(student_id):
       i=int(i)
 
       if i==0:
-
-        f.seek(10*3,1)
+        
+        i=10
       
-      else:
+      f.seek(i*3,1)
 
-        f.seek(i*3,1)
-
-      a=bytes([0,0,0])
-
-      f.write(a)
+      f.write(b'\x00\x00\x00')
 
       f.seek(-3,1)
-
 
 def detect():
   with open('lenna.bmp', 'rb') as f:
